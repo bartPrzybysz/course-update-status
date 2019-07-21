@@ -1,0 +1,53 @@
+.page-header {
+    background-color: rgb(33, 65, 42);
+    color: lightgray;
+    min-height: 45px;
+    top:       0px;
+    text-align: center;
+}
+
+.course-nav {
+    font-size: 1.1em;
+}
+
+.course-nav .nav-link:not(.active) {
+    color: gray;
+}
+
+.course-nav .nav-link:not(.active):hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.course-nav .nav-link.active {
+    background-color: rgb(148, 154, 165);
+    cursor: context-menu;
+}
+
+.course-nav .nav-link.active .progress {
+    border: 1px solid rgb(106, 109, 112);
+}
+
+input[type="checkbox"], input[type="radio"], h3 {
+    cursor: pointer;
+}
+
+h3 {
+    margin-left: 50px;
+    color: gray;
+}
+
+h3:hover {
+    color: black;
+}
+
+.checklist {
+    list-style: none;
+    transition-duration: 0.5s;
+}
+
+.conditional {
+    margin-top: 15px;
+    margin-left: -18px;
+}
+

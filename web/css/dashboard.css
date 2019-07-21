@@ -1,0 +1,29 @@
+.page-header {
+    background-color: rgb(33, 65, 42);
+    color: lightgray;
+    min-height: 45px;
+    top:       0px;
+    text-align: center;
+}
+
+table tr td {
+    width: 20%;
+}
+
+table tr:first-of-type:hover th {
+    background-color: white;
+    opacity: 1.0;
+}
+
+.toggle-div {
+    max-height: 410px;
+    overflow-y: scroll;
+}
+
+.toggle-div:not(.active) {
+    display: none;
+}
+
+#file {
+    cursor: pointer;
+}

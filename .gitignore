@@ -1,0 +1,3 @@
+web/uploads/*
+web/php/config.php
+*.zip
