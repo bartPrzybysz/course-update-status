@@ -60,7 +60,7 @@ In the **calculate_progress** function, locate the variable **$total_tasks**
 #### 1. Add a boolean column to courses table
 Example:
 ```SQL
-ALTER TABLE courses ADD conditiona_name TINYINT(1) NOT NULL DEFAULT '0' AFTER has_ally
+ALTER TABLE courses ADD conditional_name TINYINT(1) NOT NULL DEFAULT '0' AFTER has_ally
 ```
 #### 2. Add a new task row to the tasks table
 ```SQL
@@ -107,12 +107,12 @@ If ($row[‘condition_name’]) {
 ```
 ## Removing a task from the chcklist
 #### 1. Remove the task from the checklist page
-Open the file **course_update_status**
+Open the file **course_update_status.php**
 
 Locate the task you wish to remove and remove the followint code:
 
 *Note remember the task id for the next step*
-```php
+```html
 <li><?php make_check(task id, $selected_id); ?></li>
 ```
 
@@ -124,4 +124,50 @@ DELETE FROM checks WHERE task_id=47 /*replace this number*/
 #### 3. Delete the task from the tasks table
 ```SQL
 DELETE FROM tasks WHERE id=47 /*replace this number*/
+```
+
+## Removing a conditional task from the checklist
+#### 1. Remove the conditional task from the checklist page
+Open the file **course_update_status.php**
+
+Locate the conditional task you wish to remove. Note the task id numbers and remove the following:
+
+```html
+<li class="conditional">
+Condition Description<br>
+    <?php make_conditional("condition_name", "yes", $selected_id); ?>
+	<ul class=”checklist” id=”condition_name_yes”>
+		<li><?php make_check(47, $selected_id); ?></li>
+	</ul>
+	<?php make_conditional("condition_name", "no", $selected_id); ?>
+	<ul class=”checklist” id=”condition_name_no”>
+		<li><?php make_check(48, $selected_id); ?></li>
+	</ul>
+</li>
+```
+#### 2. Adjust progress calculation
+Open the file **php/data.php**
+
+In the **calculate_progress()** function, locate the variable **$total_tasks**
+Subtract the number of checks being removed from this value (this value should reflect the number of tasks listed in checklist)
+
+Remove the following total tasks adjustment for the condition:
+```php
+If ($row[‘condition_name’]) {
+	$total_tasks -= number of tasks in the “no” conditional ;
+} else {
+	$total_tasks -= number of tasks in the “yes” conditional ;
+}
+```
+
+#### 3. Delete the checks and tasks associated with the conditional
+Run the following sql for each of the tasks to be removed (change the task_id number):
+```sql
+DELETE FROM checks WHERE task_id=47;
+DELETE FROM tasks WHERE task_id=47;
+```
+
+#### 4. Drop the conditional from the courses table
+```sql
+ALTER TABLE courses DROP conditional_name
 ```
