@@ -36,7 +36,9 @@
             case 7: case 8: case 9:
                 $display_term = "FALL";
                 break;
-            case 10: case 11: case 12: case 1:
+            case 10: case 11: case 12: 
+                $display_year = strval(intval($display_year) + 1);
+            case 1:
                 $display_term = "SPRING";
                 break;
             default:
